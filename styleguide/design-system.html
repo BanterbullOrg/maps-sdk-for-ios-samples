@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Banterbull Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#FD5101; --accent-hover:#FF6A21;
+    --yes:#0F766E; --no:#B91C1C; --no-bright:#FE3D33;
+    --bg:#FFF; --bg-1:#FAFAFA; --bg-2:#F4F4F5;
+    --line:rgba(0,0,0,.08); --line-2:rgba(0,0,0,.16);
+    --fg:#0A0A0A; --fg-2:rgba(0,0,0,.62); --fg-3:rgba(0,0,0,.42);
+    --sans:'Inter Tight',ui-sans-serif,system-ui,-apple-system,sans-serif;
+    --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font:400 16px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .mono{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}
+  a{color:var(--accent)}
+  h1,h2,h3{font-family:var(--sans);color:var(--fg)}
+  code{font-family:var(--mono);font-size:.9em;background:var(--bg-2);padding:2px 6px;border-radius:6px}
+
+  header.top{border-bottom:1px solid var(--line);padding:56px 0 40px;background:var(--bg-1)}
+  header.top h1{font-weight:300;font-size:clamp(40px,6vw,64px);letter-spacing:-.045em;line-height:1.02}
+  header.top p{margin-top:14px;color:var(--fg-2);font-size:18px;max-width:640px;letter-spacing:-.01em}
+  .pill{display:inline-block;margin-top:20px;padding:5px 12px;border:1px solid var(--line-2);border-radius:999px;font:500 12px var(--mono);letter-spacing:.06em;color:var(--fg-2)}
+
+  section{padding:48px 0;border-bottom:1px solid var(--line)}
+  section > .wrap > .mono{display:block;margin-bottom:8px}
+  h2{font-weight:300;font-size:clamp(28px,4vw,40px);letter-spacing:-.035em;line-height:1.08}
+  .lede{margin-top:10px;color:var(--fg-2);max-width:640px}
+  .grid{margin-top:28px;display:grid;gap:16px}
+
+  /* swatches */
+  .sw{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+  .swatch{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--bg-1)}
+  .swatch .chip{height:88px}
+  .swatch .meta{padding:12px 14px}
+  .swatch .nm{font-weight:500;font-size:14px}
+  .swatch .hex{font:400 12px var(--mono);color:var(--fg-3);margin-top:2px;text-transform:uppercase}
+  .swatch .use{font-size:12px;color:var(--fg-2);margin-top:8px;line-height:1.45}
+  .chk{background-image:linear-gradient(45deg,#e9e9ec 25%,transparent 25%),linear-gradient(-45deg,#e9e9ec 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#e9e9ec 75%),linear-gradient(-45deg,transparent 75%,#e9e9ec 75%);background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0}
+
+  /* type specimens */
+  .spec{border-top:1px solid var(--line);padding:18px 0;display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:baseline}
+  .spec .k{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3)}
+  .spec .k small{display:block;margin-top:6px;color:var(--fg-3);font-weight:400;letter-spacing:0;text-transform:none}
+  .t-hero{font-weight:300;font-size:56px;line-height:.98;letter-spacing:-.05em}
+  .t-h1{font-weight:300;font-size:44px;line-height:1.02;letter-spacing:-.045em}
+  .t-h2{font-weight:300;font-size:34px;line-height:1.08;letter-spacing:-.035em}
+  .t-h3{font-weight:400;font-size:20px;line-height:1.3;letter-spacing:-.02em}
+  .t-h4{font-weight:500;font-size:16px;letter-spacing:-.01em}
+  .t-lead{font-size:19px;color:var(--fg-2);letter-spacing:-.01em}
+  .t-body{font-size:16px;color:var(--fg-2)}
+  .t-small{font-size:14px;color:var(--fg-2)}
+  .t-eyebrow{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}
+
+  /* scale rows */
+  .rows{margin-top:24px;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .row{display:grid;grid-template-columns:160px 1fr;gap:16px;padding:14px 18px;border-top:1px solid var(--line);align-items:center;font-size:14px}
+  .row:first-child{border-top:0}
+  .row .name{font:500 13px var(--mono);color:var(--fg)}
+  .row .val{color:var(--fg-2)}
+  .bar{height:14px;background:var(--accent);border-radius:4px}
+
+  /* radius + shadow demo */
+  .demos{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .demo{border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--bg-1);text-align:center}
+  .demo .box{height:64px;background:var(--bg);border:1px solid var(--line-2);margin:0 auto 12px;width:100%}
+  .demo .box.sh{border:0}
+  .demo .nm{font:500 12px var(--mono);color:var(--fg)}
+  .demo .val{font-size:11px;color:var(--fg-3);margin-top:4px}
+
+  /* buttons / form */
+  .btn{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 22px;border-radius:999px;font:500 14px/1 var(--sans);letter-spacing:-.01em;border:1px solid transparent;cursor:pointer;transition:.2s;text-decoration:none}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-hover)}
+  .btn-ghost{background:transparent;color:var(--fg);border-color:var(--line-2)}
+  .btn-ghost:hover{background:rgba(0,0,0,.04)}
+  .btn-sm{height:36px;padding:0 16px;font-size:13px}
+  .btnrow{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:24px}
+  .waitlist{margin:24px 0 0;display:flex;gap:8px;max-width:480px;padding:6px;border:1px solid var(--line-2);border-radius:999px;background:rgba(255,255,255,.9)}
+  .waitlist input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--fg);font:400 15px var(--sans);padding:0 18px}
+  .waitlist input::placeholder{color:var(--fg-3)}
+
+  .clist{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+  .citem{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--bg-1)}
+  .citem h3{font-weight:400;font-size:18px;letter-spacing:-.02em}
+  .citem code{background:var(--bg-2)}
+  .citem p{margin-top:8px;font-size:13px;color:var(--fg-2);line-height:1.5}
+
+  footer{padding:40px 0;color:var(--fg-3);font:400 12px var(--mono);letter-spacing:.04em}
+  @media (max-width:560px){.spec{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="mono">Design System</div>
+    <h1>Banterbull</h1>
+    <p>The complete visual language of banterbull.com — colour, type, spacing, radius, shadow and components — transcribed directly from the live source. Light-only, by design.</p>
+    <span class="pill">Trade what you know.</span>
+  </div>
+</header>
+
+<section id="colour">
+  <div class="wrap">
+    <div class="mono">01 — Colour</div>
+    <h2>One accent over a neutral ramp</h2>
+    <p class="lede">Orange <code>#FD5101</code> is the only accent. Teal and red are trading <em>signals</em> (YES / NO), never decoration.</p>
+    <div class="grid sw">
+      <div class="swatch"><div class="chip" style="background:#FD5101"></div><div class="meta"><div class="nm">accent</div><div class="hex">#FD5101</div><div class="use">Primary buttons, links, focus, live dot, chart lines.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#FF6A21"></div><div class="meta"><div class="nm">accent-hover</div><div class="hex">#FF6A21</div><div class="use">Hover for accent surfaces.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#0F766E"></div><div class="meta"><div class="nm">yes</div><div class="hex">#0F766E</div><div class="use">YES / positive / success.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#B91C1C"></div><div class="meta"><div class="nm">no</div><div class="hex">#B91C1C</div><div class="use">NO / negative / error.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#FE3D33"></div><div class="meta"><div class="nm">no-bright</div><div class="hex">#FE3D33</div><div class="use">Downward price change on charts only.</div></div></div>
+      <div class="swatch"><div class="chip chk"></div><div class="meta"><div class="nm">bg</div><div class="hex">#FFFFFF</div><div class="use">Page background.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#FAFAFA;border-bottom:1px solid var(--line)"></div><div class="meta"><div class="nm">bg-1</div><div class="hex">#FAFAFA</div><div class="use">Raised surface: cards, steps, footer.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#F4F4F5;border-bottom:1px solid var(--line)"></div><div class="meta"><div class="nm">bg-2</div><div class="hex">#F4F4F5</div><div class="use">Hover surface on raised elements.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#0A0A0A"></div><div class="meta"><div class="nm">fg</div><div class="hex">#0A0A0A</div><div class="use">Primary text & headings.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:rgba(0,0,0,.62)"></div><div class="meta"><div class="nm">fg-2</div><div class="hex">rgba(0,0,0,.62)</div><div class="use">Secondary text / body.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:rgba(0,0,0,.42)"></div><div class="meta"><div class="nm">fg-3</div><div class="hex">rgba(0,0,0,.42)</div><div class="use">Muted text, captions, placeholders.</div></div></div>
+      <div class="swatch"><div class="chip chk" style="position:relative"><div style="position:absolute;inset:0;background:rgba(0,0,0,.16)"></div></div><div class="meta"><div class="nm">line / line-2</div><div class="hex">rgba(0,0,0,.08 / .16)</div><div class="use">Hairline & stronger borders.</div></div></div>
+    </div>
+    <p class="lede" style="margin-top:20px"><strong>Market-card palette</strong> (Polymarket-style card only): <code>#23272D</code> · <code>#6B727B</code> · <code>#9AA0A8</code> · <code>#DFE1E5</code> · <code>#BFC3CA</code>.</p>
+  </div>
+</section>
+
+<section id="type">
+  <div class="wrap">
+    <div class="mono">02 — Typography</div>
+    <h2>Inter Tight &amp; Geist Mono</h2>
+    <p class="lede">Display is <strong>light (300)</strong> with <strong>tight negative tracking</strong> — the brand signature. Labels are monospace, uppercase, letter-spaced.</p>
+    <div class="spec"><div class="k">Hero<small>clamp(44,5.6vw,84) · 300 · −.05em</small></div><div class="t-hero">Trade what you know.</div></div>
+    <div class="spec"><div class="k">H1<small>clamp(40,5vw,72) · 300 · −.045em</small></div><div class="t-h1">Everyone deserves to trade what they know.</div></div>
+    <div class="spec"><div class="k">H2<small>clamp(30,3.4vw,44) · 300 · −.035em</small></div><div class="t-h2">The world runs on knowledge.</div></div>
+    <div class="spec"><div class="k">H3<small>20px · 400 · −.02em</small></div><div class="t-h3">Built for where you are</div></div>
+    <div class="spec"><div class="k">H4<small>16px · 500 · −.01em</small></div><div class="t-h4">Regulator first, engineering first</div></div>
+    <div class="spec"><div class="k">Lead<small>19px · 400 · −.01em · fg-2</small></div><div class="t-lead">A real-money prediction market in your language and your currency.</div></div>
+    <div class="spec"><div class="k">Body<small>16px / 1.5 · 400 · fg-2</small></div><div class="t-body">Every contract is a simple YES or NO. YES and NO always add to 100, settled against a named public source.</div></div>
+    <div class="spec"><div class="k">Small<small>14px · fg-2</small></div><div class="t-small">No spam. Just launch updates.</div></div>
+    <div class="spec"><div class="k">Eyebrow / label<small>mono · 12px · .08em · upper</small></div><div class="t-eyebrow">How it works</div></div>
+  </div>
+</section>
+
+<section id="spacing">
+  <div class="wrap">
+    <div class="mono">03 — Spacing</div>
+    <h2>4 → 96 scale</h2>
+    <p class="lede">Max width <code>1200px</code>; gutter <code>24px</code> (→ <code>16px</code> on mobile). Section padding 64px, closing CTA 96px.</p>
+    <div class="rows">
+      <div class="row"><span class="name">4</span><div class="bar" style="width:4px"></div></div>
+      <div class="row"><span class="name">8</span><div class="bar" style="width:8px"></div></div>
+      <div class="row"><span class="name">12</span><div class="bar" style="width:12px"></div></div>
+      <div class="row"><span class="name">16</span><div class="bar" style="width:16px"></div></div>
+      <div class="row"><span class="name">24</span><div class="bar" style="width:24px"></div></div>
+      <div class="row"><span class="name">32</span><div class="bar" style="width:32px"></div></div>
+      <div class="row"><span class="name">48</span><div class="bar" style="width:48px"></div></div>
+      <div class="row"><span class="name">64</span><div class="bar" style="width:64px"></div></div>
+      <div class="row"><span class="name">96</span><div class="bar" style="width:96px"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="radius">
+  <div class="wrap">
+    <div class="mono">04 — Radius &amp; shadow</div>
+    <h2>Pills, soft cards, restrained lift</h2>
+    <div class="grid demos">
+      <div class="demo"><div class="box" style="border-radius:999px"></div><div class="nm">radius-pill</div><div class="val">999px</div></div>
+      <div class="demo"><div class="box" style="border-radius:20px"></div><div class="nm">radius-lg</div><div class="val">20px</div></div>
+      <div class="demo"><div class="box" style="border-radius:16px"></div><div class="nm">radius-md</div><div class="val">16px</div></div>
+      <div class="demo"><div class="box" style="border-radius:10px"></div><div class="nm">radius-sm</div><div class="val">10px</div></div>
+      <div class="demo"><div class="box" style="border-radius:9px"></div><div class="nm">radius-xs</div><div class="val">9px</div></div>
+      <div class="demo"><div class="box" style="border-radius:7px"></div><div class="nm">radius-chip</div><div class="val">7px</div></div>
+      <div class="demo"><div class="box sh" style="border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 40px rgba(0,0,0,.06)"></div><div class="nm">shadow-card</div><div class="val">market card</div></div>
+      <div class="demo"><div class="box sh" style="border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,.08)"></div><div class="nm">shadow-pop</div><div class="val">consent pill</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="controls">
+  <div class="wrap">
+    <div class="mono">05 — Controls</div>
+    <h2>Buttons &amp; the waitlist</h2>
+    <div class="btnrow">
+      <a class="btn btn-primary">Join the waitlist</a>
+      <a class="btn btn-ghost">How it works</a>
+      <a class="btn btn-primary btn-sm">Get early access</a>
+    </div>
+    <form class="waitlist" onsubmit="return false">
+      <input type="email" placeholder="Enter your email address" aria-label="Email address">
+      <button class="btn btn-primary" type="submit">Join the waitlist</button>
+    </form>
+    <p class="t-small" style="margin-top:12px">Status line uses <code style="color:var(--yes)">.form-msg.ok</code> (teal) / <code style="color:var(--no)">.form-msg.err</code> (red). Live forms POST <code>{email, seconds_on_page}</code> to <code>/api/waitlist</code>.</p>
+  </div>
+</section>
+
+<section id="components">
+  <div class="wrap">
+    <div class="mono">06 — Components</div>
+    <h2>The catalogue</h2>
+    <div class="clist">
+      <div class="citem"><h3>Masthead</h3><p><code>.masthead</code> — sticky 64px glass bar, blur(16px), hairline bottom. Nav hides ≤900px.</p></div>
+      <div class="citem"><h3>Hero</h3><p><code>.hero</code> — two columns: copy + a 540px live market card. Mono eyebrow with a glowing accent dot.</p></div>
+      <div class="citem"><h3>Steps</h3><p><code>.steps</code> — 4-up hairline grid, radius-lg, bg-1 tiles; mono accent numbers.</p></div>
+      <div class="citem"><h3>Why cards</h3><p><code>.card</code> — bg-1 + hairline, 24px accent icon; hover reveals a soft radial accent glow.</p></div>
+      <div class="citem"><h3>Stat strip</h3><p><code>.stats</code> — 3-up; 56px light figures with an accent emphasis span.</p></div>
+      <div class="citem"><h3>Closing CTA</h3><p><code>.close-cta</code> — centred, blurred radial accent glow, centred waitlist.</p></div>
+      <div class="citem"><h3>Market card</h3><p><code>.mcard</code> — binary market with inline-SVG accent chart, dashed grid, animated end ping, YES/NO buttons.</p></div>
+      <div class="citem"><h3>Board</h3><p><code>.mqcol / .bc</code> — auto-scrolling column of mini market cards (30s marquee, pauses on hover).</p></div>
+      <div class="citem"><h3>Consent</h3><p><code>.consent</code> — floating glass pill. Production uses the region-aware widget injected site-wide by the Worker.</p></div>
+      <div class="citem"><h3>Footer</h3><p>4-column grid + a mono legal row (year + legal links).</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© <span id="y">2026</span> Banterbull — design system. Source of truth: <code>landing/</code> (index.html + new.css).</div>
+</footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
